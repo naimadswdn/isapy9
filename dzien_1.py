@@ -1,3 +1,10 @@
-word = input("Podaj wyraz:\n")
+# Script that is going to say 'Hello' to you!
 
-print(word.capitalize())
+name = input("Podaj swoje imię:\n")
+
+
+def hello_function(t):
+    print(f'Cześć {t.capitalize()}!')
+
+
+hello_function(name)
