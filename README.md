@@ -1,3 +1,3 @@
-# isapy9
+﻿# isapy9
 
-Repozytorium używane na cele edukacyjne - Python od podstaw, Infoshare Academy 2018.
+Repozytorium używane na cele edukacyjne - Python od podstaw, Infoshare Academy, Listopad 2018.
