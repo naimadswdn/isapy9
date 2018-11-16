@@ -5,7 +5,7 @@ print(
 
 celsius = input("Please provide value of Celsius degrees: ")
 pattern = int(celsius) * 1.8 + 32
-print(f'Following pattern is going to be used to convert: ℃*1.8+32.')
+print(f'Following pattern is going to be used for conversion: ℃*1.8+32.')
 
 
 def choice():
@@ -15,10 +15,10 @@ def choice():
         if user_choice == 'y':
             print(f'Step one: substitution of your value to the pattern: \n℉={celsius}*1.8+32')
             print('Step two: calculating results..')
-            print(f'Result: {celsius}℃ is equal to {pattern}℉.')
+            print(f'Result: {celsius}℃ is equal to {round(pattern,2)}℉.')
             break
         elif user_choice == 'n':
-            print(f'Result: {celsius}℃ is equal to {pattern}℉.')
+            print(f'Result: {celsius}℃ is equal to {round(pattern,2)}℉.')
             break
         else:
             print('Wrong answer! Please write "y" or "n".')
