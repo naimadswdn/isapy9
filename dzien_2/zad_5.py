@@ -5,10 +5,24 @@ print('Hello! This program is going to draw a rectangle based on provided dimens
 
 time.sleep(2)
 
-width = input('Please provide width of rectangle: ')
-width = int(width)
-length = input('Please provide length of rectangle: ')
-length = int(length)
+while True:
+    width = input('Please provide width of rectangle: ')
+    width = int(width)
+    if width == 0:
+        print('Width cannot be 0! Please correct it!')
+        continue
+    else:
+        break
+
+while True:
+    length = input('Please provide length of rectangle: ')
+    length = int(length)
+    if length == 0:
+        print('Length cannot be 0! Please correct it!')
+        continue
+    else:
+        break
+
 
 side = '|'
 base = '-'
