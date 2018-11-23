@@ -1,30 +1,30 @@
-# Program to calculate remainder from money in PLN
+# Script to draw a pyramid consist of #, witch given height
 
-coins = [5, 2, 1, 0.5, 0.2, 0.1]
-
-money = input('Please provide amount of money to calculate remainder: ')
-money = float(money)
-
-# for i in coins:
-#     check_modulo = lambda x : x % i
+# Number of level is linear function of # amount
+# i   #
+# 0   1
+# 1   3
+# 2   5
+# 3   7
 #
-#     if check_modulo(money) == 0:
-#         amount = money / i
-#         print(f'{i}: {amount}')
-#         if amount * i == money:
-#             break
-#         else:
-#             continue
-#     else:
-#         continue
+# y=ax+b
+# i=1/2#-1/2
+# #=2i+1
 
-for i in coins:
-    check_modulo = lambda x : x % i
-    check_dev = lambda  x : x / i
-    if check_modulo(money) == 0 and check_dev(money) !=0:
-        print(f'{i}: {check_dev(money)}')
-        money = money - i*check_dev(money)
-    elif check_modulo(money) != 0 and check_dev(money) !=0:
-        pass
+while True:
+    height = input('Please provide height of the pyramid: ')
+    try:
+        height = int(height)
+        break
+    except:
+        print('Please provide integer number!')
+        continue
 
+
+width = 2 * height + 1
+
+for i in range(height):
+    a = 2 * i + 1
+    line = '#'*a
+    print(line.center(width))
 
