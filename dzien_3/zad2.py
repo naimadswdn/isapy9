@@ -6,6 +6,8 @@ money = input('Please provide amount of money to calculate remainder: ')
 money = float(money)
 
 
+#TO DO: not 0 ammount/ align/ def?
+
 for i in coins:
     check_modulo = lambda x : round(x % i,1)
     check_div = lambda  x : x / i
