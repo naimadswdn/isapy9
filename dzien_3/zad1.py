@@ -13,40 +13,43 @@ table_elements = ['+', '-', '|']
 
 # print(meats)
 
-max_len = max([len(i) for i in meats])
-if max_len > 30:
-    max_len = 30
-else:
-    pass
 
-# print(max_len)
-
-
-for i in range(len(meats)):
-    if i == 0:
-        print(table_elements[0] + table_elements[1] * max_len + table_elements[0], end='')
+def table_print(t):
+    max_len = max([len(i) for i in t])
+    if max_len > 30:
+        max_len = 30
     else:
-        print(table_elements[1] * max_len + table_elements[0], end='')
+        pass
 
-print('')
+    # print(max_len)
 
-for i in range(len(meats)):
-    if i == 0:
-        if len(meats[i]) > 30:
-            print(f'{table_elements[2]}{meats[i][:27]:<{max_len-3}}...{table_elements[2]}', end='')
+    for i in range(len(t)):
+        if i == 0:
+            print(table_elements[0] + table_elements[1] * max_len + table_elements[0], end='')
         else:
-            print(f'{table_elements[2]}{meats[i]:<{max_len}}{table_elements[2]}', end='')
-    else:
-        if len(meats[i]) > 30:
-            print(f'{meats[i][:27]:<{max_len-3}}...{table_elements[2]}', end='')
+            print(table_elements[1] * max_len + table_elements[0], end='')
+
+    print('')
+
+    for i in range(len(t)):
+        if i == 0:
+            if len(t[i]) > 30:
+                print(f'{table_elements[2]}{t[i][:27]:<{max_len-3}}...{table_elements[2]}', end='')
+            else:
+                print(f'{table_elements[2]}{t[i]:<{max_len}}{table_elements[2]}', end='')
         else:
-            print(f'{meats[i]:<{max_len}}{table_elements[2]}', end='')
+            if len(t[i]) > 30:
+                print(f'{t[i][:27]:<{max_len-3}}...{table_elements[2]}', end='')
+            else:
+                print(f'{t[i]:<{max_len}}{table_elements[2]}', end='')
 
-print('')
+    print('')
 
-for i in range(len(meats)):
-    if i == 0:
-        print(table_elements[0] + table_elements[1] * max_len + table_elements[0], end='')
-    else:
-        print(table_elements[1] * max_len + table_elements[0], end='')
+    for i in range(len(t)):
+        if i == 0:
+            print(table_elements[0] + table_elements[1] * max_len + table_elements[0], end='')
+        else:
+            print(table_elements[1] * max_len + table_elements[0], end='')
 
+
+table_print(meats)
