@@ -1,20 +1,25 @@
-# Program to show list content in format like:
-#   +------+------+------+
-#   | col1 | col2 | col3 |
-#   +------+------+------+
-# where list is ['col1','col2','col3']
 
 # pack all code to the function
 # add condition to max_len >30 - second function, called by if?
 # add table view if more lists in the list
 
 meats = ['all_rest_meats_from_the_whole_world','chicken', 'beef', 'pork','turkey','all_rest_meats_from_the_whole_world']
-table_elements = ['+', '-', '|']
 
+fish = ['tuna', 'salmon']
+
+# meats.append(fish)
 # print(meats)
 
 
 def table_print(t):
+    """ Program to show list content in format like:
+   +------+------+------+
+   | col1 | col2 | col3 |
+   +------+------+------+
+ where list is ['col1','col2','col3']
+"""
+    table_elements = ['+', '-', '|']
+
     max_len = max([len(i) for i in t])
     if max_len > 30:
         max_len = 30

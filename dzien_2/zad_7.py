@@ -1,6 +1,6 @@
-# Program to check if provided number is even or not.
 
 def if_even():
+    """Program to check if provided number is even or not."""
     while True:
         number = input('Please provide number: ')
         if int(number) % 2 == 0:

@@ -1,15 +1,14 @@
 # Simple script to calculate surface area of circle, based on provided radius
-import math
 
-print("Hello! This program is going to calculate surface area of circle, based on provided radius. ")
+def surface_area_of_circle():
+    """Hello! This program is going to calculate surface area of circle, based on provided radius. """
+    import math
 
-radius = input("Please provide value of circle radius [cm]: ")
-radius = int(radius)
-pattern = round(math.pi,5) * (radius ** 2)
-print(f'Following pattern is going to be used to calculate surface area: pi*(radius**2)')
+    radius = input("Please provide value of circle radius [cm]: ")
+    radius = int(radius)
+    pattern = round(math.pi, 5) * (radius ** 2)
 
-
-def choice():
+    print(f'Following pattern is going to be used to calculate surface area: pi*(radius**2)')
     print('Please write "y" if you would like to see calculations step by step. Write "n" if you want only result')
     while True:
         user_choice = input()
@@ -26,4 +25,4 @@ def choice():
             continue
 
 
-choice()
+surface_area_of_circle()
