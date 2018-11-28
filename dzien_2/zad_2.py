@@ -1,9 +1,10 @@
 # Simple converted from Fahrenheit degrees to Celsius degrees
 
 
-def Fahrenheit_to_Celsius():
+def fahrenheit_to_celsius():
     """This program is converting degrees from Fahrenheit scale to Celsius one."""
     import time
+    from dzien_2.repeat_y_or_n import repeat_y_or_n
     from dzien_2.check_if_good import check_if_good
 
     print('Hello in the simple Fahrenheit to Celsius degrees converter!')
@@ -39,6 +40,7 @@ def Fahrenheit_to_Celsius():
         else:
             print('Wrong answer! Please write "y" or "n".')
             continue
+    repeat_y_or_n(fahrenheit_to_celsius, "Would you like to convert another Fahrenheit degree?")
 
 
-Fahrenheit_to_Celsius()
+fahrenheit_to_celsius()

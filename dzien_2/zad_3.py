@@ -6,6 +6,7 @@ def surface_area_of_circle():
     import math
     import time
     from dzien_2.check_if_good import check_if_good
+    from dzien_2.repeat_y_or_n import repeat_y_or_n
 
     print("Hello! This program is going to calculate surface area of circle, based on provided radius.")
     time.sleep(1.5)
@@ -29,8 +30,7 @@ def surface_area_of_circle():
         else:
             print('Wrong answer! Please write "y" or "n".')
             continue
-
-
+    repeat_y_or_n(surface_area_of_circle, "Would you like to calculate another circle area?")
 
 
 surface_area_of_circle()

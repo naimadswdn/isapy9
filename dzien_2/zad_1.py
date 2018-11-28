@@ -1,10 +1,10 @@
 # Simple converted from Celsius degrees to Fahrenheit degrees
 
 
-
-def Celsiusz_to_Fahrenheit():
+def celsius_to_fahrenheit():
     """This program is converting degrees from Celsius scale to Fahrenheit one."""
     import time
+    from dzien_2.repeat_y_or_n import repeat_y_or_n
     from dzien_2.check_if_good import check_if_good
 
     print('Hello in the simple Celsius to Fahrenheit degrees converter!')
@@ -40,6 +40,8 @@ def Celsiusz_to_Fahrenheit():
         else:
             print('Wrong answer! Please write "y" or "n".')
             continue
+    repeat_y_or_n(celsius_to_fahrenheit, "Would you like to convert another Celsius degree?")
 
 
-Celsiusz_to_Fahrenheit()
+celsius_to_fahrenheit()
+
