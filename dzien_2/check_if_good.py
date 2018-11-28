@@ -11,7 +11,6 @@ def check_if_good(t, function_type, msg):
     """
     while True:
         t = input(msg)
-
         try:
             t = function_type(t)
             return t

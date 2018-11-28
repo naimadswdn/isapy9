@@ -2,14 +2,16 @@
 
 
 def rectangle():
-    """Hello! This program is going to draw a rectangle based on provided dimensions."""
+    """This program is going to draw a rectangle based on provided dimensions."""
     import time
-
+    from dzien_2.repeat_y_or_n import repeat_y_or_n
+    from dzien_2.check_if_good import check_if_good
+    print("Hello! This program is going to draw a rectangle based on provided dimensions.")
     time.sleep(2)
 
     while True:
-        width = input('Please provide width of rectangle: ')
-        width = int(width)
+        width = None
+        width = check_if_good(width, int, 'Please provide width of rectangle: ')
         if width == 0:
             print('Width cannot be 0! Please correct it!')
             continue
@@ -17,23 +19,22 @@ def rectangle():
             break
 
     while True:
-        length = input('Please provide length of rectangle: ')
-        length = int(length)
+        length = None
+        length = check_if_good(length, int, 'Please provide length of rectangle: ')
         if length == 0:
             print('Length cannot be 0! Please correct it!')
             continue
         else:
             break
 
-    side = '|'
-    base = '-'
-    apex = '+'
-    space = ' '
+    elements = ['|', '-', '+', ' ']
 
-    print(apex, (width - 2) * base, apex)
+    print(elements[2], (width - 2) * elements[1], elements[2])
     for i in range(length - 2):
-        print(side, (width - 2) * space, side)
-    print(apex, (width - 2) * base, apex)
+        print(elements[0], (width - 2) * elements[3], elements[0])
+    print(elements[2], (width - 2) * elements[1], elements[2])
+
+    repeat_y_or_n(rectangle, "Would you like to draw another rectangle?")
 
 
 rectangle()
