@@ -2,14 +2,27 @@
 
 
 def Celsiusz_to_Fahrenheit():
-    """Hello in the simple degrees converter!.
-    This program is converting degrees from Celsius scale to Fahrenheit one."""
+    """This program is converting degrees from Celsius scale to Fahrenheit one."""
+    import time
 
-    celsius = input("Please provide value of Celsius degrees: ")
-    pattern = int(celsius) * 1.8 + 32
+    print('Hello in the simple Celsius to Fahrenheit degrees converter!')
+    time.sleep(1.5)
+
+
+    while True:
+        celsius = input("Please provide value of Celsius degrees: ")
+
+        try:
+            celsius = float(celsius)
+            break
+        except:
+            print('Wrong data format! Did you provide a number?')
+            continue
+
+    pattern = float(celsius) * 1.8 + 32
 
     print(f'Following pattern is going to be used for conversion: ℃*1.8+32.')
-    print('Please write "y" if you would like to see calculations step by step. Write "n" if you want only result')
+    print('Please write "y" if you would like to see calculations step by step. Write "n" if you want only result.')
     while True:
         user_choice = input()
         if user_choice == 'y':
