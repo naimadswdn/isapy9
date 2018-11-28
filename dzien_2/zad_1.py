@@ -1,23 +1,27 @@
 # Simple converted from Celsius degrees to Fahrenheit degrees
 
 
+
 def Celsiusz_to_Fahrenheit():
     """This program is converting degrees from Celsius scale to Fahrenheit one."""
     import time
+    from dzien_2.check_if_good import check_if_good
 
     print('Hello in the simple Celsius to Fahrenheit degrees converter!')
     time.sleep(1.5)
 
+    celsius = None
+    celsius = check_if_good(celsius,float,"Please provide value of Celsius degrees: ")
 
-    while True:
-        celsius = input("Please provide value of Celsius degrees: ")
-
-        try:
-            celsius = float(celsius)
-            break
-        except:
-            print('Wrong data format! Did you provide a number?')
-            continue
+    # while True:
+    #     celsius = input("Please provide value of Celsius degrees: ")
+    #
+    #     try:
+    #         celsius = float(celsius)
+    #         break
+    #     except:
+    #         print('Wrong data format! Did you provide a number?')
+    #         continue
 
     pattern = float(celsius) * 1.8 + 32
 

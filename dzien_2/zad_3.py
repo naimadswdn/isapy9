@@ -1,11 +1,17 @@
 # Simple script to calculate surface area of circle, based on provided radius
 
-def surface_area_of_circle():
-    """Hello! This program is going to calculate surface area of circle, based on provided radius. """
-    import math
 
-    radius = input("Please provide value of circle radius [cm]: ")
-    radius = int(radius)
+def surface_area_of_circle():
+    """Simple script to calculate surface area of circle, based on provided radius."""
+    import math
+    import time
+    from dzien_2.check_if_good import check_if_good
+
+    print("Hello! This program is going to calculate surface area of circle, based on provided radius.")
+    time.sleep(1.5)
+
+    radius = None
+    radius = check_if_good(radius, float, "Please provide value of circle radius [cm]: ")
     pattern = round(math.pi, 5) * (radius ** 2)
 
     print(f'Following pattern is going to be used to calculate surface area: pi*(radius**2)')
@@ -23,6 +29,8 @@ def surface_area_of_circle():
         else:
             print('Wrong answer! Please write "y" or "n".')
             continue
+
+
 
 
 surface_area_of_circle()
