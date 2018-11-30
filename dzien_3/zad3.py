@@ -11,15 +11,25 @@
 
 
 def pyramid_draw():
-    """Script to draw a pyramid consist of #, witch given height."""
-    while True:
-        height = input('Please provide height of the pyramid: ')
-        try:
-            height = int(height)
-            break
-        except:
-            print('Please provide integer number!')
-            continue
+    """Script to draw a pyramid consist of #, with given height."""
+    from time import sleep
+    from dzien_2.repeat_y_or_n import repeat_y_or_n
+    from dzien_2.check_if_good import check_if_good
+
+    print('Hello! This program is drawing a pyramid consist of #, with given height. ')
+    sleep(1.5)
+
+    height = None
+    height = check_if_good(height, int, 'Please provide height of the pyramid: ')
+
+    # while True:
+    #     height = input('Please provide height of the pyramid: ')
+    #     try:
+    #         height = int(height)
+    #         break
+    #     except:
+    #         print('Please provide integer number!')
+    #         continue
 
     width = 2 * height + 1
 
@@ -27,6 +37,8 @@ def pyramid_draw():
         a = 2 * i + 1
         line = '#'*a
         print(line.center(width))
+
+    repeat_y_or_n(pyramid_draw)
 
 
 pyramid_draw()

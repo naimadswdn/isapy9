@@ -1,22 +1,21 @@
 
 def if_even():
     """Program to check if provided number is even or not."""
-    while True:
-        number = input('Please provide number: ')
-        if int(number) % 2 == 0:
-            print('Your number is even!')
-            user_choise = input('Would you like to check another number? Type "y" if yes, or "n" if no. ')
-            if user_choise == 'y':
-                continue
-            else:
-                break
-        else:
-            print('Your number is odd!')
-            user_choise = input('Would you like to check another number? Type "y" if yes, or "n" if no. ')
-            if user_choise == 'y':
-                continue
-            else:
-                break
+    from dzien_2.repeat_y_or_n import repeat_y_or_n
+    from dzien_2.check_if_good import check_if_good
+    from time import sleep
+
+    print('Hello! This program is going to check if provided number is even or not.')
+    sleep(1.5)
+    number = None
+    number = check_if_good(number, float, 'Please provide number: ')
+    if float(number) % 2 == 0:
+        print('Your number is even!')
+        repeat_y_or_n(if_even)
+
+    else:
+        print('Your number is odd!')
+        repeat_y_or_n(if_even)
 
 
 if_even()

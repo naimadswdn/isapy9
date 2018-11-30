@@ -11,13 +11,42 @@ fish = ['tuna', 'salmon']
 # print(meats)
 
 
+def create_list():
+    """Function that allow user to create his own list."""
+    from time import sleep
+
+    print('Hello! This program is showing list content in some fancy format.\nFirst we need to create your own list. ')
+    sleep(1.5)
+
+    elements = input('How long your list is? Please provide number of list elements. ')
+    while True:
+        try:
+            elements = int(elements)
+            break
+        except:
+            print('Please provide integer number!')
+            continue
+
+    user_list = []
+
+    for i in range (0, elements):
+        args = input(f'Please provide list element ({i+1} of {elements}): ')
+        user_list.append(args)
+
+    #print(user_list)
+    return user_list
+
+
 def table_print(t):
     """ Program to show list content in format like:
    +------+------+------+
    | col1 | col2 | col3 |
    +------+------+------+
  where list is ['col1','col2','col3']
+ :param t: list that is going to be print
 """
+    from dzien_2.repeat_y_or_n import repeat_y_or_n
+
     table_elements = ['+', '-', '|']
 
     max_len = max([len(i) for i in t])
@@ -26,7 +55,7 @@ def table_print(t):
     else:
         pass
 
-    # print(max_len)
+    print('Your list looks like:')
 
     for i in range(len(t)):
         if i == 0:
@@ -56,5 +85,10 @@ def table_print(t):
         else:
             print(table_elements[1] * max_len + table_elements[0], end='')
 
+    print('')
+    repeat_y_or_n(table_print)
 
-table_print(meats)
+
+# create_list()
+table_print(create_list())
+
