@@ -21,4 +21,9 @@ def divided_by_or_3_5_7():
     repeat_y_or_n(divided_by_or_3_5_7)
 
 
-divided_by_or_3_5_7()
+def main():
+    divided_by_or_3_5_7()
+
+
+if __name__ == "__main__":
+    main()

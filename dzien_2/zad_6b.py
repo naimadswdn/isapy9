@@ -14,4 +14,9 @@ def binary_to_decimal_int():
     repeat_y_or_n(binary_to_decimal_int)
 
 
-binary_to_decimal_int()
+def main():
+    binary_to_decimal_int()
+
+
+if __name__ == "__main__":
+    main()

@@ -89,6 +89,11 @@ def table_print(t):
     repeat_y_or_n(table_print)
 
 
-# create_list()
-table_print(create_list())
+def main():
+    table_print(create_list())
+
+
+if __name__ == "__main__":
+    main()
+
 

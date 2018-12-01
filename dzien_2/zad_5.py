@@ -37,4 +37,9 @@ def rectangle():
     repeat_y_or_n(rectangle, "Would you like to draw another rectangle?")
 
 
-rectangle()
+def main():
+    rectangle()
+
+
+if __name__ == "__main__":
+    main()

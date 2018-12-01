@@ -18,4 +18,9 @@ def if_even():
         repeat_y_or_n(if_even)
 
 
-if_even()
+def main():
+    if_even()
+
+
+if __name__ == "__main__":
+    main()

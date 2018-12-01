@@ -19,3 +19,10 @@ def repeat_y_or_n(t, msg='Would you like to repeat program?'):
             continue
 
 
+def main():
+    repeat_y_or_n()
+
+
+if __name__ == "__main__":
+    main()
+

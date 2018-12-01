@@ -41,4 +41,9 @@ def pyramid_draw():
     repeat_y_or_n(pyramid_draw)
 
 
-pyramid_draw()
+def main():
+    pyramid_draw()
+
+
+if __name__ == "__main__":
+    main()

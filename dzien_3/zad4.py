@@ -31,4 +31,9 @@ def dog_years():
     repeat_y_or_n(dog_years)
 
 
-dog_years()
+def main():
+    dog_years()
+
+
+if __name__ == "__main__":
+    main()

@@ -17,3 +17,11 @@ def check_if_good(t, function_type, msg):
         except:
             print('Wrong data format! Did you provide correct value?')
             continue
+
+
+def main():
+    check_if_good()
+
+
+if __name__ == "__main__":
+    main()

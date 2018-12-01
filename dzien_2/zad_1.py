@@ -43,5 +43,10 @@ def celsius_to_fahrenheit():
     repeat_y_or_n(celsius_to_fahrenheit, "Would you like to convert another Celsius degree?")
 
 
-celsius_to_fahrenheit()
+def main():
+    celsius_to_fahrenheit()
+
+
+if __name__ == "__main__":
+    main()
 

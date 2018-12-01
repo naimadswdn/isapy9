@@ -48,6 +48,10 @@ def remainder_of_cash():
     repeat_y_or_n(repeat_y_or_n)
 
 
-remainder_of_cash()
+def main():
+    remainder_of_cash()
 
+
+if __name__ == "__main__":
+    main()
 

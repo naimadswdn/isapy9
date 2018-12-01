@@ -23,6 +23,12 @@ def binary_to_digit():
     print(f'Binary {binary} is equal to {decimal} in decimal system.')
 
 
-binary_to_digit()
+def main():
+    binary_to_digit()
+
+
+if __name__ == "__main__":
+    main()
+
 
 

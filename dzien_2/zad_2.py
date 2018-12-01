@@ -43,4 +43,9 @@ def fahrenheit_to_celsius():
     repeat_y_or_n(fahrenheit_to_celsius, "Would you like to convert another Fahrenheit degree?")
 
 
-fahrenheit_to_celsius()
+def main():
+    fahrenheit_to_celsius()
+
+
+if __name__ == "__main__":
+    main()

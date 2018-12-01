@@ -36,5 +36,10 @@ def first_last():
 #             continue
 
 
-first_last()
+def main():
+    first_last()
+
+
+if __name__ == "__main__":
+    main()
 

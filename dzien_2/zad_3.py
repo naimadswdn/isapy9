@@ -3,6 +3,7 @@
 
 def surface_area_of_circle():
     """Simple script to calculate surface area of circle, based on provided radius."""
+
     import math
     import time
     from dzien_2.check_if_good import check_if_good
@@ -33,4 +34,9 @@ def surface_area_of_circle():
     repeat_y_or_n(surface_area_of_circle, "Would you like to calculate another circle area?")
 
 
-surface_area_of_circle()
+def main():
+    surface_area_of_circle()
+
+
+if __name__ == "__main__":
+    main()

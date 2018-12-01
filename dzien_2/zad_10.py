@@ -20,4 +20,9 @@ def is_leap_year():
     repeat_y_or_n(is_leap_year)
 
 
-is_leap_year()
+def main():
+    is_leap_year()
+
+
+if __name__ == "__main__":
+    main()
