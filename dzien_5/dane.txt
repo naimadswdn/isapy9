@@ -1,7 +1,10 @@
-Damian aaaa
-Alicja bbbb
-Natalia cccc
-TOmek dddd
-Damian eeeee
-Mariusz ffff
-Asia gggg
+Program was executed below number of times:
+39
+Number of analysed signs:
+159775
+Number of found words:
+19696
+Number of found sentences:
+1844
+Number of analysed numbers:
+10777

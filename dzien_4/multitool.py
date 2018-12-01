@@ -6,7 +6,7 @@ def print_programs_list():
     from time import sleep
 
     print("Hello in Multitool Python by Damian.\nFull list of available programs:: ")
-    sleep(1.5)
+    sleep(0.5)
 
     programs = ['Celsius to Fahrenheit converter.',
                 'Fahrenheit to Celsius converter.',
@@ -15,13 +15,14 @@ def print_programs_list():
                 'Draw a rectangle.',
                 'Binary to decimal converter.',
                 'Check if number is even or odd.',
-                'Check if number is divided by 3 or 5 or 7',
-                'Check if provided number is divided by 3 and 5 and 7',
+                'Check if number is divided by 3 or 5 or 7.',
+                'Check if provided number is divided by 3 and 5 and 7.',
                 'Check if provided year is a leap-year.',
                 'Print list elements in fancy table.',
                 'Calculator of remainder from cash.',
-                'Draw a pyramid',
-                'Calculator od your dog age in dog\'s scale'
+                'Draw a pyramid.',
+                'Calculator od your dog age in dog\'s scale.',
+                'Text analyst: create stats on provided text file.'
                 ]
 
     for i, program_name in enumerate(programs, start=1):
@@ -33,6 +34,7 @@ def print_programs_list():
 def multitool():
     """Interface for all created programs that allow user to choose interesting one."""
     from dzien_2.check_if_good import check_if_good
+    from dzien_2.repeat_y_or_n import repeat_y_or_n
     from dzien_2.zad_1 import celsius_to_fahrenheit
     from dzien_2.zad_2 import fahrenheit_to_celsius
     from dzien_2.zad_3 import surface_area_of_circle
@@ -47,6 +49,7 @@ def multitool():
     from dzien_3.zad2 import remainder_of_cash
     from dzien_3.zad3 import pyramid_draw
     from dzien_3.zad4 import dog_years
+    from dzien_5.text_stat_creator import text_stat_creator
 
     print_programs_list()
 
@@ -83,8 +86,12 @@ def multitool():
         pyramid_draw()
     elif user_choice == 14:
         dog_years()
+    elif user_choice == 15:
+        text_stat_creator()
     else:
         print('Wrong number!')
+
+    repeat_y_or_n(multitool,'Would you like to repeat Multitool program?')
 
 
 multitool()
