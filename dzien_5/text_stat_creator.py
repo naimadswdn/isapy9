@@ -9,6 +9,22 @@ def text_stat_creator():
     import string
     import re
 
+    try:
+        open('dane.txt', 'r')
+    except:
+        stats_pattern = """Program was executed below number of times:
+0
+Number of analysed signs:
+0
+Number of found words:
+0
+Number of found sentences:
+0
+Number of analysed numbers:
+0"""
+        with open('dane.txt', 'w') as stats_pattern_to_write:
+            stats_pattern_to_write.writelines(stats_pattern)
+
     while True:
         file_directory = input('Please provide absolute directory of file that you want to statistics see: '
                                'If file is located in program folder then you can type only file name. ')
@@ -48,34 +64,52 @@ def text_stat_creator():
     with open(r'C:\Users\Damian\Documents\isapy9\isapy9-Damian\dzien_5\dane.txt', "r+") as data_file:
         lines = data_file.readlines()
 
+    def stats_update(variable, line_num, appending_value):
+        variable = int(variable)
+        variable += int(appending_value)
+        lines[line_num] = str(variable) + '\n'
+
     opens_count = lines[1]
-    opens_count = int(opens_count)
-    opens_count += 1
-    lines[1] = str(opens_count) + '\n'
-
     signs_count = lines[3]
-    signs_count = int(signs_count)
-    signs_count += int(count_signs)
-    # print(signs_count)
-    lines[3] = str(signs_count) + '\n'
-
     words_count = lines[5]
-    words_count = int(words_count)
-    words_count += words_number
-    # print(words_count)
-    lines[5] = str(words_count) + '\n'
-
     sentences_count = lines[7]
-    sentences_count = int (sentences_count)
-    sentences_count += sentences_number
-    # print(sentences_count)
-    lines[7] = str(sentences_count) + '\n'
-
     numbers_count = lines[9]
-    numbers_count = int(numbers_count)
-    numbers_count += count_numbers
-    # print(numbers_count)
-    lines[9] = str(numbers_count) + '\n'
+
+    stats_update(opens_count, 1, 1)
+    stats_update(signs_count, 3, count_signs)
+    stats_update(words_count, 5, words_number)
+    stats_update(sentences_count, 7, sentences_number)
+    stats_update(numbers_count, 9, count_numbers)
+
+
+    # opens_count = lines[1]
+    # opens_count = int(opens_count)
+    # opens_count += 1
+    # lines[1] = str(opens_count) + '\n'
+    #
+    # signs_count = lines[3]
+    # signs_count = int(signs_count)
+    # signs_count += int(count_signs)
+    # # print(signs_count)
+    # lines[3] = str(signs_count) + '\n'
+    #
+    # words_count = lines[5]
+    # words_count = int(words_count)
+    # words_count += words_number
+    # # print(words_count)
+    # lines[5] = str(words_count) + '\n'
+    #
+    # sentences_count = lines[7]
+    # sentences_count = int (sentences_count)
+    # sentences_count += sentences_number
+    # # print(sentences_count)
+    # lines[7] = str(sentences_count) + '\n'
+    #
+    # numbers_count = lines[9]
+    # numbers_count = int(numbers_count)
+    # numbers_count += count_numbers
+    # # print(numbers_count)
+    # lines[9] = str(numbers_count) + '\n'
 
     with open(r'C:\Users\Damian\Documents\isapy9\isapy9-Damian\dzien_5\dane.txt', 'w') as data_file_to_write:
         data_file_to_write.writelines(lines)
