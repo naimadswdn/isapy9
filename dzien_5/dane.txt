@@ -1,10 +1,10 @@
 Program was executed below number of times:
-4
+5
 Number of analysed signs:
-8404
+10531
 Number of found words:
-1204
+1400
 Number of found sentences:
-96
+147
 Number of analysed numbers:
-48
+137
