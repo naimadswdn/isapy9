@@ -1,10 +1,9 @@
 import pickle
 import smtplib
-import pprint
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dzien_2.check_if_good import check_if_good
-from collections import OrderedDict
+import datetime
 
 diary_file = 'file'
 
@@ -20,6 +19,15 @@ class Diary(object):
     def __len__(self):
         return len(self.read_file())
 
+    @staticmethod
+    def date_validation(date):
+        try:
+            datetime.datetime.strptime(date, '%d-%m-%Y')
+        except ValueError:
+            print('Incorrect data format, accepted: DD-MM-YYYY.\n'
+                  'Please try once again.')
+            exit()
+
     def add_entry(self):
         """
         Function for adding new entries into the diary.
@@ -27,11 +35,9 @@ class Diary(object):
         :return:
         """
         date = input('Please provide data with format DD-MM-YYYY: ')
+        self.date_validation(date)
         content = input('Provide content of diary entry: ')
-        #new_entry = {"date": date, "content": content}
-        new_entry = OrderedDict()
-        new_entry['date'] = date
-        new_entry['content'] = content
+        new_entry = {"date": date, "content": content}
 
         old_entries = self.read_file()
         new_entries = old_entries
@@ -62,7 +68,8 @@ class Diary(object):
 
         #self.open_diary.close()
 
-    def menu(self):
+    @staticmethod
+    def menu():
         """
         Simple function to print menu for user interaction.
         :return:
@@ -72,7 +79,7 @@ class Diary(object):
               "2. Add new entry.\n"
               "3. Remove entry.\n"
               "4. Search in diary...\n"
-              "5. Exit")
+              "5. Exit.")
 
     def remove_entry(self):
         """
@@ -100,7 +107,8 @@ class Diary(object):
             print('There is no such entry in the diary.')
         self.open_diary.close()
 
-    def send_email(self,topic, content):
+    @staticmethod
+    def send_email(topic, content):
         """
         Function that is sending an email.
         :param topic: it is a topic of an email
@@ -135,8 +143,9 @@ class Diary(object):
         for index, entry in enumerate(all_entries):
             if keyword in entry['content']:
                 number_of_results += 1
-                print(entry['content'])
-                print(f'\nKeyword found on {index} index, which means {index +1} entry in diary.')
+                result_content = entry['content']
+                print(f'Result {number_of_results}: {result_content}')
+                print(f'Keyword found on {index} index, which means {index +1} entry in diary.\n')
 
         if number_of_results == 0:
             print('Keyword not found in the diary.')
@@ -161,7 +170,15 @@ def control():
     if decision == 1:
         print('Here are your diary entries:')
         all_entries = diary.read_file()
-        pprint.pprint(all_entries)
+        if all_entries is None:
+            pass
+        else:
+            count = 0
+            for i in all_entries:
+                count += 1
+                print(f'Entry {count}:')
+                for x, y in i.items():
+                    print(x + ': ' + y)
         diary.open_diary.close()
     elif decision == 2:
         print('Adding new entry...')
