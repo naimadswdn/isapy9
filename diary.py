@@ -121,12 +121,19 @@ class Diary(object):
         #         print(f'Result {number_of_results}: {result_content}')
         #         print(f'Keyword found on {index} index, which means {index +1} entry in diary.\n')
 
-        for i in range(self.number_of_all_entries):
-            single = SingleEntry(i)
-            if keyword in single.content.lower():
+        # for i in range(self.number_of_all_entries):
+        #     single = SingleEntry(i)
+        #     if keyword in single.content.lower():
+        #         number_of_results += 1
+        #         print(f'Result {number_of_results}: {single}')
+        #         print(f'Keyword found on {i} index, which means {i +1} entry in diary.\n')
+
+        for index, entry in enumerate(self.all_entries):
+            if keyword in entry['content'].lower():
+                single = SingleEntry(index)
                 number_of_results += 1
                 print(f'Result {number_of_results}: {single}')
-                print(f'Keyword found on {i} index, which means {i +1} entry in diary.\n')
+                print(f'Keyword found on {index} index, which means {index +1} entry in diary.\n')
 
         if number_of_results == 0:
             print('Keyword not found in the diary.')
