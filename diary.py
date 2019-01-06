@@ -1,9 +1,7 @@
 import pickle
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 from dzien_2.check_if_good import check_if_good
 import datetime
+from send_email import send_email
 
 diary_file = 'file'
 
@@ -11,13 +9,15 @@ diary_file = 'file'
 class Diary(object):
     def __init__(self):
         self.open_diary = open(diary_file, 'rb+')
+        self.all_entries = self.read_file()
+        self.number_of_all_entries = len(self.all_entries)
 
     def __str__(self):
         return 'Diary powered by Python code.\n' \
                'It allows user to read, add, remove or search entries in whole diary content. '
 
     def __len__(self):
-        return len(self.read_file())
+        return len(self.all_entries)
 
     @staticmethod
     def date_validation(date):
@@ -39,7 +39,7 @@ class Diary(object):
         content = input('Provide content of diary entry: ')
         new_entry = {"date": date, "content": content}
 
-        old_entries = self.read_file()
+        old_entries = self.all_entries
         new_entries = old_entries
 
         try:
@@ -86,49 +86,24 @@ class Diary(object):
         Function responsible for removing entries from diary.
         :return:
         """
-        all_entries = self.read_file()
-        number_of_all_entries = len(all_entries)
-        print(f'Number of all entries in diary is equal to {number_of_all_entries}.')
+        print(f'Number of all entries in diary is equal to {self.number_of_all_entries}.')
         entry_number_to_remove = int(input('Provide number of entry to remove: '))
 
-        if entry_number_to_remove <= number_of_all_entries and entry_number_to_remove > 0:
+        if entry_number_to_remove <= self.number_of_all_entries and entry_number_to_remove > 0:
             index_to_remove = entry_number_to_remove -1
-            del(all_entries[index_to_remove])
+            del(self.all_entries[index_to_remove])
             self.open_diary.seek(0)
 
             topic = 'Someone remove entry from diary'
             content = f'Entry with index number {index_to_remove} has been removed\n' \
                       f'For user it was entry number {entry_number_to_remove}.'
 
-            self.send_email(topic,content)
-            pickle.dump(all_entries, self.open_diary)
+            send_email(topic,content)
+            pickle.dump(self.all_entries, self.open_diary)
             print('Entry has been removed successfully.')
         else:
             print('There is no such entry in the diary.')
         self.open_diary.close()
-
-    @staticmethod
-    def send_email(topic, content):
-        """
-        Function that is sending an email.
-        :param topic: it is a topic of an email
-        :param content: it is a content of the message
-        :return:
-        """
-        mail = MIMEMultipart()
-        mail["Subject"] = topic
-        mail["To"] = 'naimadswdn@gmail.com'
-        mail["From"] = 'isapy@int.pl'
-
-        body = MIMEText(content)
-        mail.attach(body)
-
-        server = smtplib.SMTP('poczta.int.pl')
-        server.login('isapy@int.pl', 'isapython;')
-        server.send_message(mail)
-        server.quit()
-
-        print('Email has been send successfully.')
 
     def search(self):
         """
@@ -136,16 +111,22 @@ class Diary(object):
         It search across whole diary entries.
         :return:
         """
-        all_entries = self.read_file()
         keyword = input('Please type keyword to search: ')
-
+        keyword = keyword.lower()
         number_of_results = 0
-        for index, entry in enumerate(all_entries):
-            if keyword in entry['content']:
+        # for index, entry in enumerate(self.all_entries):
+        #     if keyword in entry['content']:
+        #         number_of_results += 1
+        #         result_content = entry['content']
+        #         print(f'Result {number_of_results}: {result_content}')
+        #         print(f'Keyword found on {index} index, which means {index +1} entry in diary.\n')
+
+        for i in range(self.number_of_all_entries):
+            single = SingleEntry(i)
+            if keyword in single.content.lower():
                 number_of_results += 1
-                result_content = entry['content']
-                print(f'Result {number_of_results}: {result_content}')
-                print(f'Keyword found on {index} index, which means {index +1} entry in diary.\n')
+                print(f'Result {number_of_results}: {single}')
+                print(f'Keyword found on {i} index, which means {i +1} entry in diary.\n')
 
         if number_of_results == 0:
             print('Keyword not found in the diary.')
@@ -154,7 +135,22 @@ class Diary(object):
         self.open_diary.close()
 
 
-diary = Diary()
+class SingleEntry(Diary):
+    def __init__(self, index, author='Me'):
+        super(SingleEntry, self).__init__()
+        # self.date = date
+        # self.content = content
+        self.index = index
+        self.author = author
+        self.entry = self.all_entries[self.index]
+        self.content = self.entry['content']
+        self.date = self.entry['date']
+
+    def __str__(self):
+        # count = 0
+        # count += 1
+        # print(f'Entry {count}:')
+        return self.date + ': ' + self.content
 
 
 def control():
@@ -162,6 +158,7 @@ def control():
     Function to allow user interact with diary.
     :return:
     """
+    diary = Diary()
     diary.menu()
     decision = None
     decision = check_if_good(decision, int, 'What is your choice? ')
@@ -169,16 +166,17 @@ def control():
 
     if decision == 1:
         print('Here are your diary entries:')
-        all_entries = diary.read_file()
-        if all_entries is None:
+        if diary.all_entries is None:
             pass
         else:
             count = 0
-            for i in all_entries:
+            for i in range(diary.number_of_all_entries):
                 count += 1
                 print(f'Entry {count}:')
-                for x, y in i.items():
-                    print(x + ': ' + y)
+                single = SingleEntry(i)
+                print(single)
+                # for x, y in i.items():
+                #     print(x + ': ' + y)
         diary.open_diary.close()
     elif decision == 2:
         print('Adding new entry...')
@@ -198,6 +196,10 @@ def control():
 
 control()
 
+
+#single = SingleEntry(0)
+
+#print(single)
 
 
 
