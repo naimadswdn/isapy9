@@ -7,17 +7,30 @@ diary_file = 'file'
 
 
 class Diary(object):
-    def __init__(self):
-        self.open_diary = open(diary_file, 'rb+')
+    def __init__(self, file):
+        try:
+            f = open(file, 'r')
+            self.file = file
+            f.close()
+        except FileNotFoundError:
+            f = open(file, 'w+')
+            self.file = file
+            f.close()
+
+        self.open_diary = open(file, 'rb+')
         self.all_entries = self.read_file()
-        self.number_of_all_entries = len(self.all_entries)
+        try:
+            self.number_of_all_entries = len(self.all_entries)
+        except TypeError:
+            self.number_of_all_entries = 0
 
     def __str__(self):
         return 'Diary powered by Python code.\n' \
                'It allows user to read, add, remove or search entries in whole diary content. '
 
     def __len__(self):
-        return len(self.all_entries)
+        return self.number_of_all_entries
+
 
     @staticmethod
     def date_validation(date):
@@ -130,7 +143,24 @@ class Diary(object):
 
         for index, entry in enumerate(self.all_entries):
             if keyword in entry['content'].lower():
-                single = SingleEntry(index)
+                single = SingleEntry(index, self.file)
+                number_of_results += 1
+                print(f'Result {number_of_results}: {single}')
+                print(f'Keyword found on {index} index, which means {index +1} entry in diary.\n')
+
+        if number_of_results == 0:
+            print('Keyword not found in the diary.')
+        else:
+            print(f'Number of results: {number_of_results}')
+        self.open_diary.close()
+
+    def search_by_date(self):
+        date = input('Please provide date to search in diary. Format is: DD-MM-YYYY. ')
+        number_of_results = 0
+
+        for index, entry in enumerate(self.all_entries):
+            if date in entry['date']:
+                single = SingleEntry(index, self.file)
                 number_of_results += 1
                 print(f'Result {number_of_results}: {single}')
                 print(f'Keyword found on {index} index, which means {index +1} entry in diary.\n')
@@ -143,8 +173,8 @@ class Diary(object):
 
 
 class SingleEntry(Diary):
-    def __init__(self, index, author='Me'):
-        super(SingleEntry, self).__init__()
+    def __init__(self, index, file, author='Me'):
+        super(SingleEntry, self).__init__(file)
         # self.date = date
         # self.content = content
         self.index = index
@@ -154,9 +184,7 @@ class SingleEntry(Diary):
         self.date = self.entry['date']
 
     def __str__(self):
-        # count = 0
-        # count += 1
-        # print(f'Entry {count}:')
+
         return self.date + ': ' + self.content
 
 
@@ -165,7 +193,10 @@ def control():
     Function to allow user interact with diary.
     :return:
     """
-    diary = Diary()
+    file_directory = input('Please provide absolute directory of diary file.\n'
+                           'If file do not exist, it is going to be created automatically.\n'
+                           'Your file directory: ')
+    diary = Diary(file_directory)
     diary.menu()
     decision = None
     decision = check_if_good(decision, int, 'What is your choice? ')
@@ -180,7 +211,7 @@ def control():
             for i in range(diary.number_of_all_entries):
                 count += 1
                 print(f'Entry {count}:')
-                single = SingleEntry(i)
+                single = SingleEntry(i, diary.file)
                 print(single)
                 # for x, y in i.items():
                 #     print(x + ': ' + y)
@@ -195,7 +226,13 @@ def control():
         diary.open_diary.close()
     elif decision == 4:
         print('Search mode on.')
-        diary.search()
+        search_mode = int(input('Would you like to search by content(1) or date(2)? Please provide number. '))
+        if search_mode == 1:
+            diary.search()
+        elif search_mode == 2:
+            diary.search_by_date()
+        else:
+            print('Wrong number!! ')
         diary.open_diary.close()
     elif decision == 5:
         exit()
@@ -203,6 +240,8 @@ def control():
 
 control()
 
+
+#print(len(Diary('file2')))
 
 #single = SingleEntry(0)
 
