@@ -8,21 +8,11 @@ diary_file = 'file'
 
 class Diary(object):
     def __init__(self, file):
-        try:
-            f = open(file, 'r')
-            self.file = file
-            f.close()
-        except FileNotFoundError:
-            f = open(file, 'w+')
-            self.file = file
-            f.close()
-
-        self.open_diary = open(file, 'rb+')
+        self.file_to_check = file
+        self.file = self.file_exist_or_not()
+        self.open_diary = open(self.file_exist_or_not(), 'rb+')
         self.all_entries = self.read_file()
-        try:
-            self.number_of_all_entries = len(self.all_entries)
-        except TypeError:
-            self.number_of_all_entries = 0
+        self.number_of_all_entries = self.number_of_all_entries()
 
     def __str__(self):
         return 'Diary powered by Python code.\n' \
@@ -31,6 +21,23 @@ class Diary(object):
     def __len__(self):
         return self.number_of_all_entries
 
+    def file_exist_or_not(self):
+        try:
+            f = open(self.file_to_check, 'r')
+            f.close()
+            return self.file_to_check
+        except FileNotFoundError:
+            f = open(self.file_to_check, 'w+')
+            f.close()
+            return self.file_to_check
+
+    def number_of_all_entries(self):
+        try:
+            lenght = len(self.all_entries)
+            return lenght
+        except TypeError:
+            self.number_of_all_entries = 0
+            return self.number_of_all_entries
 
     @staticmethod
     def date_validation(date):
@@ -77,9 +84,8 @@ class Diary(object):
             data = pickle.load(self.open_diary)
             return data
         except EOFError:
-            print('Your diary is empty!')
-
-        #self.open_diary.close()
+            #print('Your diary is empty!')
+            pass
 
     @staticmethod
     def menu():
@@ -94,13 +100,11 @@ class Diary(object):
               "4. Search in diary...\n"
               "5. Exit.")
 
-    def remove_entry(self):
+    def remove_entry(self, entry_number_to_remove):
         """
         Function responsible for removing entries from diary.
         :return:
         """
-        print(f'Number of all entries in diary is equal to {self.number_of_all_entries}.')
-        entry_number_to_remove = int(input('Provide number of entry to remove: '))
 
         if entry_number_to_remove <= self.number_of_all_entries and entry_number_to_remove > 0:
             index_to_remove = entry_number_to_remove -1
@@ -118,13 +122,12 @@ class Diary(object):
             print('There is no such entry in the diary.')
         self.open_diary.close()
 
-    def search(self):
+    def search(self, keyword):
         """
         Function responsible for searching for some keyword in the diary content.
         It search across whole diary entries.
         :return:
         """
-        keyword = input('Please type keyword to search: ')
         keyword = keyword.lower()
         number_of_results = 0
         # for index, entry in enumerate(self.all_entries):
@@ -154,8 +157,7 @@ class Diary(object):
             print(f'Number of results: {number_of_results}')
         self.open_diary.close()
 
-    def search_by_date(self):
-        date = input('Please provide date to search in diary. Format is: DD-MM-YYYY. ')
+    def search_by_date(self, date):
         number_of_results = 0
 
         for index, entry in enumerate(self.all_entries):
@@ -205,7 +207,7 @@ def control():
     if decision == 1:
         print('Here are your diary entries:')
         if diary.all_entries is None:
-            pass
+            print('Your diary is empty!')
         else:
             count = 0
             for i in range(diary.number_of_all_entries):
@@ -222,15 +224,20 @@ def control():
         diary.open_diary.close()
     elif decision == 3:
         print('Procedure of removing entries started.')
-        diary.remove_entry()
+        print(f'Number of all entries in diary is equal to {diary.number_of_all_entries}.')
+        entry_number_to_remove = int(input('Provide number of entry to remove: '))
+        diary.remove_entry(entry_number_to_remove)
         diary.open_diary.close()
     elif decision == 4:
         print('Search mode on.')
         search_mode = int(input('Would you like to search by content(1) or date(2)? Please provide number. '))
         if search_mode == 1:
-            diary.search()
+            keyword = input('Please type keyword to search: ')
+            diary.search(keyword)
         elif search_mode == 2:
-            diary.search_by_date()
+            date = input('Please provide date to search in diary. Format is: DD-MM-YYYY. ')
+            diary.date_validation(date)
+            diary.search_by_date(date)
         else:
             print('Wrong number!! ')
         diary.open_diary.close()
@@ -238,10 +245,11 @@ def control():
         exit()
 
 
-control()
+while True:
+    control()
 
 
-#print(len(Diary('file2')))
+#print(len(Diary('file3')))
 
 #single = SingleEntry(0)
 
